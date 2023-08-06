@@ -1,1 +1,18 @@
-
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: argo-rollouts-dashboard
+  namespace: argo-rollouts
+spec:
+  host: argo-rollouts-dashboard.argo-rollouts.svc.cluster.local
+  subsets:
+  - labels:
+      app.kubernetes.io/component: rollouts-dashboard
+      app.kubernetes.io/instance: argo-rollouts
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: argo-rollouts
+      app.kubernetes.io/part-of: argo-rollouts
+    name: http
+  trafficPolicy:
+    tls:
+      mode: DISABLE

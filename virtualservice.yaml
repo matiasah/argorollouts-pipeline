@@ -7,9 +7,9 @@ spec:
   gateways:
   - gateway/istio-ingressgateway
   hosts:
-  - localhost
-  - host.docker.internal
-  - *.ddns.net
+  - 'localhost'
+  - 'host.docker.internal'
+  - '*.ddns.net'
   http:
   - match:
     - uri:

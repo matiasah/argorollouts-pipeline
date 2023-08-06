@@ -1,1 +1,26 @@
-
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argo-rollouts-dashboard
+  namespace: argo-rollouts
+spec:
+  gateways:
+  - gateway/istio-ingressgateway
+  hosts:
+  - localhost
+  - host.docker.internal
+  - *.ddns.net
+  http:
+  - match:
+    - uri:
+        prefix: /argo-rollouts/
+    name: http
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: argo-rollouts-dashboard.argo-rollouts.svc.cluster.local
+        port:
+          number: 3100
+        subset: http
+      weight: 100
